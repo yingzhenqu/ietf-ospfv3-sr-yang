@@ -4,16 +4,12 @@
       'http://xml.resource.org/public/rfc/bibxml/reference.RFC.2119.xml'>
     <!ENTITY RFC3688 PUBLIC ''
       'http://xml.resource.org/public/rfc/bibxml/reference.RFC.3688.xml'>
-    <!ENTITY RFC5246 PUBLIC ''
-      'http://xml.resource.org/public/rfc/bibxml/reference.RFC.5246.xml'>
     <!ENTITY RFC6020 PUBLIC ''
       'http://xml.resource.org/public/rfc/bibxml/reference.RFC.6020.xml'>
     <!ENTITY RFC6241 PUBLIC ''
       'http://xml.resource.org/public/rfc/bibxml/reference.RFC.6241.xml'>
     <!ENTITY RFC6242 PUBLIC ''
       'http://xml.resource.org/public/rfc/bibxml/reference.RFC.6242.xml'>
-    <!ENTITY RFC6536 PUBLIC ''
-      'http://xml.resource.org/public/rfc/bibxml/reference.RFC.6536.xml'>
     <!ENTITY RFC7950 PUBLIC ''
       'http://xml.resource.org/public/rfc/bibxml/reference.RFC.7950.xml'>
     <!ENTITY RFC8022 PUBLIC ''
@@ -22,8 +18,12 @@
       'http://xml.resource.org/public/rfc/bibxml/reference.RFC.8040.xml'>
     <!ENTITY RFC8340 PUBLIC ''
       'http://xml.resource.org/public/rfc/bibxml/reference.RFC.8340.xml'>
+    <!ENTITY RFC8341 PUBLIC ''
+      'http://xml.resource.org/public/rfc/bibxml/reference.RFC.8341.xml'>
     <!ENTITY RFC8349 PUBLIC ''
       'http://xml.resource.org/public/rfc/bibxml/reference.RFC.8349.xml'>
+    <!ENTITY RFC8446 PUBLIC ''
+      'http://xml.resource.org/public/rfc/bibxml/reference.RFC.8446.xml'>
     <!ENTITY RFC8666 PUBLIC ''
       'http://xml.resource.org/public/rfc/bibxml/reference.RFC.8666.xml'>
     <!ENTITY I-D.ietf-ospf-yang PUBLIC ''
@@ -40,7 +40,7 @@
 <?rfc rfcedstyle="yes" ?>
 <?rfc subcompact="no" ?>
 
-<rfc category="info" docName="draft-acee-lsr-ospfv3-sr-yang-04" ipr="trust200902">
+<rfc category="info" docName="draft-acee-lsr-ospfv3-sr-yang-05" ipr="trust200902">
   <!-- category values: std, bcp, info, exp, and historic
      ipr values: full3667, noModification3667, noDerivatives3667
      you can add the attributes updates="NNNN" and obsoletes="NNNN"
@@ -117,7 +117,7 @@
 
   <middle>
     <section title="Overview">
-      <t>YANG <xref target="RFC6020"></xref>  <xref target="RFC7950"></xref> is a
+      <t>YANG <xref target="RFC7950"></xref> is a
       data definition language
       used to define the contents of a conceptual data store
       that allows networked devices to be managed using NETCONF
@@ -129,7 +129,8 @@
 
       <t>This document defines a YANG data module augmenting the IETF OSPF SR
       YANG model <xref target="I-D.ietf-ospf-sr-yang"/>, and can be used to
-      configure and manage OSPFv3 extensions for Segment Routing
+      configure and manage OSPFv3 extensions for Segment Routing with the MPLS
+      data plane.
       <xref target="RFC8666"/>. </t>
 
       <t>The augmentation defined in this document requires support for both
@@ -146,9 +147,8 @@
 
 
   <section title="Tree Diagrams">
-    <t> This document uses the graphical representation of data models
-   defined in <xref target="RFC8340"/>. </t>
-
+    <t> Tree diagrams used in this document follow the notation defined
+      in <xref target="RFC8340"/>. </t>
   </section>
 
 
@@ -397,7 +397,7 @@ augment /rt:routing/rt:control-plane-protocols
         <t>
     <figure>
       <artwork><![CDATA[
-<CODE BEGINS> file "ietf-ospfv3-sr@2021-04-29.yang"
+<CODE BEGINS> file "ietf-ospfv3-sr@2021-10-18.yang"
 module ietf-ospfv3-sr {
   yang-version 1.1;
   namespace "urn:ietf:params:xml:ns:yang:ietf-ospfv3-sr";
@@ -449,9 +449,9 @@ module ietf-ospfv3-sr {
      and policies.
 
      This YANG model conforms to the Network Management
-     Datastore Architecture (NMDA) as described in RFC 8242.
+     Datastore Architecture (NMDA) as described in RFC 8342.
 
-     Copyright (c) 2020 IETF Trust and the persons identified as
+     Copyright (c) 2021 IETF Trust and the persons identified as
      authors of the code.  All rights reserved.
 
      Redistribution and use in source and binary forms, with or
@@ -472,7 +472,7 @@ module ietf-ospfv3-sr {
 
   reference "RFC XXXX";
 
-  revision 2021-04-29 {
+  revision 2021-10-18 {
     description
       "Initial revision.";
     reference
@@ -513,8 +513,8 @@ module ietf-ospfv3-sr {
     description "Extended prefix range TLV grouping.";
 
     container ospfv3-extended-prefix-range-tlvs {
-      description "The list of range of prefixes.";
-      list extended-prefix-range-tlv {    //type=2?
+      description "The list of extended prefix range TLVs.";
+      list extended-prefix-range-tlv {
         description "The range of prefixes.";
         leaf prefix-length {
           type uint8;
@@ -863,9 +863,9 @@ module ietf-ospfv3-sr {
        RESTCONF <xref target="RFC8040"/>. The lowest NETCONF layer is the secure transport
        layer, and the mandatory-to-implement secure transport is Secure Shell (SSH)
        <xref target="RFC6242"/>. The lowest RESTCONF layer is HTTPS, and the
-       mandatory-to-implement secure transport is TLS <xref target="RFC5246"/>.</t>
+       mandatory-to-implement secure transport is TLS <xref target="RFC8446"/>.</t>
 
-   <t>The NETCONF access control model <xref target="RFC6536"/> provides the
+   <t>The Network Configuration Access Control Model (NACM) [<xref target="RFC8341"/> provides the
       means to restrict access for particular NETCONF or RESTCONF users to a
       pre-configured subset of all available NETCONF or RESTCONF protocol
       operations and content.</t>
@@ -938,15 +938,15 @@ module ietf-ospfv3-sr {
       <!--?rfc include="http://xml.resource.org/public/rfc/bibxml/reference.RFC.2119.xml"?-->
       &RFC2119;
       &RFC3688;
-      &RFC5246;
       &RFC6020;
       &RFC6241;
       &RFC6242;
-      &RFC6536;
       &RFC7950;
       &RFC8022;
       &RFC8040;
+      &RFC8341;
       &RFC8349;
+      &RFC8446;
       &RFC8666;
       &I-D.ietf-ospf-yang;
       &I-D.ietf-ospf-sr-yang;
