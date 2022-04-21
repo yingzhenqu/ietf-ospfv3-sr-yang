@@ -40,7 +40,7 @@
 <?rfc rfcedstyle="yes" ?>
 <?rfc subcompact="no" ?>
 
-<rfc category="std" docName="draft-acee-lsr-ospfv3-sr-yang-06" ipr="trust200902">
+<rfc category="std" docName="draft-acee-lsr-ospfv3-sr-yang-07" ipr="trust200902">
   <!-- category values: std, bcp, info, exp, and historic
      ipr values: full3667, noModification3667, noDerivatives3667
      you can add the attributes updates="NNNN" and obsoletes="NNNN"
@@ -156,7 +156,9 @@
 
     <t>This document defines a YANG module for OSPFv3 extensions for Segment
     Routing <xref target="RFC8666"/>. It is an augmentation of the OSPF
-    SR base YANG model. <xref target="RFC8022"/> and <xref target="RFC8349"/>
+    SR base YANG model, where the configuration for both OSPFv2 and OSPFv3
+    are defined. </t>
+    <t><xref target="RFC8022"/> and <xref target="RFC8349"/>
     are not referenced in the document text but within the YANG module itself.</t>
 
 
